@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xmls="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_20dp"
+        android:elevation="@dimen/padding_5dp"
+        xmls:cardCornerRadius="@dimen/padding_8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_usericon_fragment_setting"
+                android:layout_width="@dimen/padding_80dp"
+                android:layout_height="@dimen/padding_80dp"
+                android:layout_margin="@dimen/padding_20dp"
+                android:src="@drawable/icon_bear" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/padding_10dp"
+                android:layout_marginTop="@dimen/padding_10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username_fragment_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="admin"
+                    android:textSize="@dimen/text_size_30sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/padding_40dp"
+                android:layout_height="@dimen/padding_40dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/padding_10dp"
+                android:background="@android:drawable/ic_menu_info_details"
+                android:scaleType="centerCrop" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

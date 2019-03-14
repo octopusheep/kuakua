@@ -1,10 +1,15 @@
 package club.zhangyuyang.kuakua.fwk_presenter;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import club.zhangyuyang.kuakua.MainActivity;
+import club.zhangyuyang.kuakua.R;
+import club.zhangyuyang.kuakua.base.BaseActicity;
+import club.zhangyuyang.kuakua.base.BasePresenter;
 
 /**
  * @Author :   yuyang
@@ -15,27 +20,32 @@ import club.zhangyuyang.kuakua.MainActivity;
  * Content   : TODO
  * Other     :
  */
-public class MainPresenter implements IMainPresenter {
+public class MainPresenter {
 
     private MainActivity mActivity;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
 
     public MainPresenter(Context context) {
-        mActivity =(MainActivity) context;
+        mActivity = (MainActivity) context;
     }
 
-    @Override
     public void initView() {
         mActivity.initView();
     }
 
-    @Override
+    public void showFragment(Fragment fragment) {
+
+        mFragmentManager = getFragmentManager();
+        mFragmentTransaction = getFragmentTransaction();
+        mFragmentTransaction.replace(R.id.fragment_container, fragment);
+        mFragmentTransaction.commit();
+    }
+
     public FragmentManager getFragmentManager() {
         return mActivity.getSupportFragmentManager();
     }
 
-    @Override
     public FragmentTransaction getFragmentTransaction() {
         return mFragmentManager.beginTransaction();
     }

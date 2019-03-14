@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConversationActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/padding_50dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_back_activity_conversation"
+            android:layout_width="@dimen/padding_30dp"
+            android:layout_height="@dimen/padding_30dp"
+            android:layout_margin="@dimen/padding_10dp"
+            android:background="@android:drawable/ic_menu_revert" />
+
+        <TextView
+            android:id="@+id/tv_title_activity_conversation"
+            android:gravity="center"
+            android:text="@string/test"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_margin="@dimen/padding_10dp"
+            android:layout_width="@dimen/padding_30dp"
+            android:layout_height="@dimen/padding_30dp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="@dimen/padding_8dp"
+        android:layout_margin="@dimen/padding_10dp"
+        app:cardCornerRadius="@dimen/padding_10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/et_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/et_conversation"
+                />
+
+            <Button
+                android:id="@+id/bt_send"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/bt_send" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

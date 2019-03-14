@@ -4,4 +4,7 @@
     <string name="item_bottom_bar_tv_2">homie</string>
     <string name="item_bottom_bar_tv_3">findy</string>
     <string name="item_bottom_bar_tv_4">setty</string>
+    <string name="test">Test</string>
+    <string name="bt_send">send</string>
+    <string name="et_conversation">type something here</string>
 </resources>

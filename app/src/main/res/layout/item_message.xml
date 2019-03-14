@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_guest_activity_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_icon_guest_item_message"
+            android:layout_width="@dimen/padding_60dp"
+            android:layout_height="@dimen/padding_60dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/message_left"
+            android:gravity="left|top">
+
+            <TextView
+                android:id="@+id/tv_icon_guest_item_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/test" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_user_activity_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/message_right"
+            android:gravity="left|top">
+
+            <TextView
+                android:id="@+id/tv_icon_user_item_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/test" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_icon_user_item_message"
+            android:layout_width="@dimen/padding_60dp"
+            android:layout_height="@dimen/padding_60dp" />
+
+    </LinearLayout>
+</LinearLayout>

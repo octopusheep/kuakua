@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/item_bottom_bar"
-    android:paddingLeft="@dimen/padding_30dp"
-    android:paddingRight="@dimen/padding_30dp"
+    android:paddingLeft="@dimen/padding_20dp"
+    android:paddingRight="@dimen/padding_20dp"
     android:gravity="center">
 
     <ImageView

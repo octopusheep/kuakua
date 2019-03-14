@@ -7,15 +7,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import club.zhangyuyang.kuakua.base.BaseActicity;
+import club.zhangyuyang.kuakua.fragment.ChatFragment;
+import club.zhangyuyang.kuakua.fragment.FriendFragment;
+import club.zhangyuyang.kuakua.fragment.NaviFragment;
+import club.zhangyuyang.kuakua.fragment.SettingFragment;
 import club.zhangyuyang.kuakua.fwk_presenter.MainPresenter;
 import club.zhangyuyang.kuakua.fwk_view.IMainView;
 import club.zhangyuyang.kuakua.fwk_view.assets.BottomBarItem1;
 import club.zhangyuyang.kuakua.fwk_view.assets.BottomBarItem2;
 import club.zhangyuyang.kuakua.fwk_view.assets.BottomBarItem3;
 import club.zhangyuyang.kuakua.fwk_view.assets.BottomBarItem4;
+import club.zhangyuyang.kuakua.test.TestFragment;
 
 
-public class MainActivity extends AppCompatActivity implements IMainView, View.OnClickListener {
+public class MainActivity extends BaseActicity implements IMainView, View.OnClickListener {
 
     private MainPresenter mPresenter;
 
@@ -48,23 +54,23 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         mBottomBarItem3.setOnClickListener(this);
         mBottomBarItem4.setOnClickListener(this);
 
-
+        mPresenter.showFragment(new TestFragment());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.item_bottom_bar_1:
-
+                mPresenter.showFragment(new ChatFragment());
                 break;
             case R.id.item_bottom_bar_2:
-
+                mPresenter.showFragment(new FriendFragment());
                 break;
             case R.id.item_bottom_bar_3:
-
+                mPresenter.showFragment(new NaviFragment());
                 break;
             case R.id.item_bottom_bar_4:
-
+                mPresenter.showFragment(new SettingFragment());
                 break;
         }
     }

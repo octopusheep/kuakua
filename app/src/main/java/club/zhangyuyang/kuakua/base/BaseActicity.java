@@ -2,6 +2,7 @@ package club.zhangyuyang.kuakua.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import club.zhangyuyang.kuakua.util.ActivityManager;
@@ -15,12 +16,17 @@ import club.zhangyuyang.kuakua.util.ActivityManager;
  * Content   : TODO
  * Other     :
  */
-public class BaseActicity extends AppCompatActivity {
+public abstract class BaseActicity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ActivityManager.add(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
     }
 
     @Override
@@ -29,4 +35,6 @@ public class BaseActicity extends AppCompatActivity {
 
         ActivityManager.remove(this);
     }
+
+    public abstract void initView();
 }
