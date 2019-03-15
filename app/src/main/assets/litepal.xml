@@ -35,6 +35,7 @@
         <mapping class ="club.zhangyuyang.kuakua.fwk_model.UserBean"/>
         <mapping class ="club.zhangyuyang.kuakua.fwk_model.FriendBean"/>
         <mapping class ="club.zhangyuyang.kuakua.fwk_model.MessageBean"/>
+        <mapping class ="club.zhangyuyang.kuakua.fwk_model.AnswerBean"/>
     </list>
 
     <!--

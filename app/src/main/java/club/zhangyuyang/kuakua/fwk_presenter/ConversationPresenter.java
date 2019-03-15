@@ -2,14 +2,18 @@ package club.zhangyuyang.kuakua.fwk_presenter;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import club.zhangyuyang.kuakua.ConversationActivity;
 import club.zhangyuyang.kuakua.R;
+import club.zhangyuyang.kuakua.adapter.ConversationAdapter;
+import club.zhangyuyang.kuakua.fwk_model.AnswerBean;
 import club.zhangyuyang.kuakua.fwk_model.MessageBean;
 import club.zhangyuyang.kuakua.fwk_model.UserBean;
 
@@ -23,10 +27,13 @@ import club.zhangyuyang.kuakua.fwk_model.UserBean;
  * Other     :
  */
 public class ConversationPresenter {
+    private static final String TAG = "ConversationPresenter";
     private ConversationActivity mActivity;
     private SQLiteDatabase mDatabase;
     private Intent mIntent;
     private String mUsername;
+    private ConversationAdapter mAdapter;
+    private MessageBean mMessageBean;
 
     public ConversationPresenter(ConversationActivity activity) {
         mActivity = activity;
@@ -44,7 +51,7 @@ public class ConversationPresenter {
         }
     }
 
-    private UserBean getUserInformation() {
+    public UserBean getUserInformation() {
         if (!loginBefore()) {
             initDefalutUser();
         }
@@ -56,15 +63,26 @@ public class ConversationPresenter {
     }
 
     public List<MessageBean> getMessageList() {
-        return LitePal.where("username like ?", mUsername).order("id").find(MessageBean.class);
+        return LitePal.where("username like ?", mUsername).find(MessageBean.class);
+    }
+
+    public List<AnswerBean> getAnswerList() {
+        return LitePal.findAll(AnswerBean.class);
     }
 
     public List<MessageBean> getDefaultList() {
-        return new ArrayList<MessageBean>();
+        List<MessageBean> list = new ArrayList<>();
+        list.add(new MessageBean("f1", "hello", false));
+        Log.d(TAG, "getDefaultList: " + list.size());
+        return list;
     }
 
     public boolean isNeverTalk() {
         return getMessageList() == null;
+    }
+
+    public boolean isNullAnswer() {
+        return getAnswerList().size()==0;
     }
 
     public String getTitle() {
@@ -93,7 +111,48 @@ public class ConversationPresenter {
 
     public void sendMessage(String message) {
 
-        MessageBean messageBean = new MessageBean(mUsername,message,true);
-        messageBean.save();
+        mMessageBean = new MessageBean(mUsername, message, true);
+        mMessageBean.save();
     }
+
+    public ConversationAdapter getAdapter() {
+        mAdapter = new ConversationAdapter(getMessageList(), getUserInformation());
+        return mAdapter;
+    }
+
+    public int getAdapterLastIndex() {
+        return mAdapter.getItemCount() - 1;
+    }
+
+    public boolean isInvaildMessage(String message) {
+        return message.equals("");
+    }
+
+    public void excuteMessage(String message) {
+        mMessageBean = new MessageBean(mUsername, getAnswer(message), false);
+        mMessageBean.save();
+    }
+
+    public String getAnswer(String message) {
+        initAnswerDatabase();
+
+        return queryAnswerFromDefault(message);
+    }
+
+    private void initAnswerDatabase() {
+        if (isNullAnswer()) {
+            new AnswerBean("hi", "hi").save();
+            new AnswerBean("hello", "hello").save();
+            new AnswerBean(".", "whats mean about your dot?").save();
+        }
+    }
+
+    private String queryAnswerFromDefault(String messsage) {
+        List<AnswerBean> list = LitePal.where("question like ?", messsage).find(AnswerBean.class);
+        if (list.size() != 0) {
+            return list.get(0).getAnswer1();
+        }
+        return "sorry, i don't understand what u mean";
+    }
+
 }

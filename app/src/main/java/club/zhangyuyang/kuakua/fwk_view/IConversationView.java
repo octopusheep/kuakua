@@ -16,4 +16,6 @@ import club.zhangyuyang.kuakua.fwk_model.UserBean;
  */
 public interface IConversationView {
     void initView(List<MessageBean> list, String nickname, UserBean userBean);
+
+    void refreshRecyclerView();
 }

@@ -3,6 +3,7 @@ package club.zhangyuyang.kuakua;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,9 +22,9 @@ import club.zhangyuyang.kuakua.fwk_model.UserBean;
 import club.zhangyuyang.kuakua.fwk_presenter.ConversationPresenter;
 import club.zhangyuyang.kuakua.fwk_view.IConversationView;
 
-public class ConversationActivity extends BaseActicity implements IConversationView,View.OnClickListener {
+public class ConversationActivity extends BaseActicity implements IConversationView, View.OnClickListener {
     private static final String TAG = "ConversationActivity";
-    public static final String EXTRA_USERNAME_GUEST="club.zhangyuyang.kuakua.conversationactivity.EXTRA_USERNAME_GUEST";
+    public static final String EXTRA_USERNAME_GUEST = "club.zhangyuyang.kuakua.conversationactivity.EXTRA_USERNAME_GUEST";
 
     private ConversationPresenter mPresenter;
     private ConversationAdapter mAdapter;
@@ -54,9 +55,8 @@ public class ConversationActivity extends BaseActicity implements IConversationV
     }
 
 
-
-    public static void startConversationActivity(Context context, String username){
-        Intent intent = new Intent(context,ConversationActivity.class);
+    public static void startConversationActivity(Context context, String username) {
+        Intent intent = new Intent(context, ConversationActivity.class);
         intent.putExtra(EXTRA_USERNAME_GUEST, username);
         context.startActivity(intent);
     }
@@ -72,7 +72,14 @@ public class ConversationActivity extends BaseActicity implements IConversationV
         mAdapter = new ConversationAdapter(list, userBean);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
 
+    }
+
+    @Override
+    public void refreshRecyclerView() {
+        mRecyclerView.setAdapter(mPresenter.getAdapter());
+        mRecyclerView.scrollToPosition(mPresenter.getAdapterLastIndex());
     }
 
     @Override
@@ -82,13 +89,22 @@ public class ConversationActivity extends BaseActicity implements IConversationV
                 finish();
                 break;
             case R.id.bt_send:
-                String message = mEditText.getText().toString();
-                if (message.equals("")) {
+                final String message = mEditText.getText().toString();
+                if (mPresenter.isInvaildMessage(message)) {
                     break;
                 } else {
                     mEditText.setText("");
-                    Log.d(TAG, "onClick: "+message);
                     mPresenter.sendMessage(message);
+                    refreshRecyclerView();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPresenter.excuteMessage(message);
+                            refreshRecyclerView();
+                        }
+                    }, 1000);
+
                 }
                 break;
         }

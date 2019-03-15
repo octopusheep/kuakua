@@ -2,6 +2,7 @@ package club.zhangyuyang.kuakua.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,18 @@ import club.zhangyuyang.kuakua.fwk_model.UserBean;
  * Other     :
  */
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.VH> {
-
+    private static final String TAG = "ConversationAdapter";
     private List<MessageBean> mList;
     private FriendBean mFriendBean;
     private UserBean mUserBean;
 
     public ConversationAdapter(List<MessageBean> list, UserBean bean) {
+
+        for (MessageBean messageBean : list) {
+            Log.d(TAG, ": "+messageBean.getUsername());
+            Log.d(TAG, ": "+messageBean.getMessage());
+            Log.d(TAG, ": "+messageBean.isSendBySelf());
+        }
         mList = list;
         mUserBean = bean;
     }
@@ -65,7 +72,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mList.size();
     }
 
     public class VH extends RecyclerView.ViewHolder {
