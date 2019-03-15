@@ -4,12 +4,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import club.zhangyuyang.kuakua.MainActivity;
 import club.zhangyuyang.kuakua.R;
-import club.zhangyuyang.kuakua.base.BaseActicity;
-import club.zhangyuyang.kuakua.base.BasePresenter;
 
 /**
  * @Author :   yuyang

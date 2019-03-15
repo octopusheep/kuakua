@@ -12,7 +12,7 @@ import org.litepal.crud.LitePalSupport;
  * Content   : TODO
  * Other     :
  */
-public class FriendBean extends LitePalSupport{
+public class FriendBean extends LitePalSupport {
 
     private int usericon;
 
@@ -25,7 +25,7 @@ public class FriendBean extends LitePalSupport{
     private String motto;
     private String zone;
 
-    private boolean status1;
+    private String status1;
     private boolean status2;
     private boolean status3;
     private boolean status4;
@@ -35,7 +35,10 @@ public class FriendBean extends LitePalSupport{
     private boolean status8;
     private boolean status9;
 
-    public FriendBean(String username,int usericon, String nickname) {
+    public FriendBean() {
+    }
+
+    public FriendBean(String username, int usericon, String nickname) {
         this.username = username;
         this.usericon = usericon;
         this.nickname = nickname;
@@ -97,11 +100,11 @@ public class FriendBean extends LitePalSupport{
         this.zone = zone;
     }
 
-    public boolean isStatus1() {
+    public String getStatus1() {
         return status1;
     }
 
-    public void setStatus1(boolean status1) {
+    public void setStatus1(String status1) {
         this.status1 = status1;
     }
 

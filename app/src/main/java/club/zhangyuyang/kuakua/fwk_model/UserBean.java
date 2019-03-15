@@ -34,6 +34,19 @@ public class UserBean extends LitePalSupport{
     private boolean status8;
     private boolean status9;
 
+    public UserBean() {
+    }
+
+    public UserBean(int usericon, String username, String password, String nickname, String gender, String motto, String zone) {
+        this.usericon = usericon;
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.gender = gender;
+        this.motto = motto;
+        this.zone = zone;
+    }
+
     public int getUsericon() {
         return usericon;
     }

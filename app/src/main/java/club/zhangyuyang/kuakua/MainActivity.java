@@ -37,6 +37,7 @@ public class MainActivity extends BaseActicity implements IMainView, View.OnClic
 
         mPresenter = new MainPresenter(this);
         mPresenter.initView();
+        mPresenter.showFragment(new FriendFragment());
 
 
     }

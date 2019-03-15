@@ -9,6 +9,7 @@ import org.litepal.LitePal;
 
 import club.zhangyuyang.kuakua.R;
 import club.zhangyuyang.kuakua.fragment.SettingFragment;
+import club.zhangyuyang.kuakua.fwk_model.DataModel;
 import club.zhangyuyang.kuakua.fwk_model.UserBean;
 
 /**
@@ -21,11 +22,9 @@ import club.zhangyuyang.kuakua.fwk_model.UserBean;
  * Other     :
  */
 public class SettingPresenter {
-    private static final String TAG = "SettingPresenter";
 
     private SettingFragment mFragment;
     private Context mContext;
-    private SQLiteDatabase mDatabase;
 
     public SettingPresenter(Fragment fragment) {
         mFragment = (SettingFragment) fragment;
@@ -33,39 +32,7 @@ public class SettingPresenter {
     }
 
     public void initView() {
-        mFragment.initView(getUserInformation());
-    }
-
-    public UserBean getUserInformation() {
-        initDatabase();
-        if (!loginBefore()) {
-            initDefalutUser();
-        }
-        return LitePal.find(UserBean.class, 1);
-
-    }
-
-    public void initDatabase() {
-        mDatabase = LitePal.getDatabase();
-    }
-
-    public boolean loginBefore() {
-        return LitePal.find(UserBean.class, 1) != null;
-    }
-
-    ;
-
-    public void initDefalutUser() {
-
-        UserBean userBean = new UserBean();
-        userBean.setNickname("Utopia");
-        userBean.setUsername("admin");
-        userBean.setPassword("123456");
-        userBean.setUsericon(R.drawable.icon_dog);
-        userBean.setGender("male");
-        userBean.setMotto("I like Minecraft");
-        userBean.setZone("Hangzhou");
-        userBean.save();
+        mFragment.initView(DataModel.queryUserInformation());
     }
 
 }

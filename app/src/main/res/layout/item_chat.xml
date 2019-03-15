@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding_10dp"
+    android:elevation="@dimen/padding_8dp"
+    app:cardCornerRadius="@dimen/padding_10dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_item_fragment_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_usericon_fragment_chat"
+            android:layout_width="@dimen/padding_70dp"
+            android:layout_height="@dimen/padding_70dp"
+            android:layout_margin="@dimen/padding_10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_dog" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/padding_10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nickname_fragment_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/test"
+                android:textSize="@dimen/text_size_24sp" />
+
+            <TextView
+                android:id="@+id/tv_message_fragment_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_10dp"
+                android:ellipsize="end"
+                android:hint="@string/test"
+                android:lines="1"
+                android:maxEms="8"
+                android:text="last message last message last message last message last message last message "
+                android:textSize="@dimen/text_size_20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

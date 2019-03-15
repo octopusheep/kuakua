@@ -14,7 +14,6 @@ import java.util.List;
 import club.zhangyuyang.kuakua.ConversationActivity;
 import club.zhangyuyang.kuakua.R;
 import club.zhangyuyang.kuakua.fwk_model.FriendBean;
-import club.zhangyuyang.kuakua.fwk_model.UserBean;
 
 /**
  * @Author :   yuyang
@@ -38,7 +37,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.VH>{
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_freind, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friend, viewGroup, false);
         return new VH(view);
     }
 

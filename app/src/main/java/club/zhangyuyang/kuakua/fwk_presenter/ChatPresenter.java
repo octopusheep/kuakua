@@ -1,6 +1,9 @@
 package club.zhangyuyang.kuakua.fwk_presenter;
 
-import club.zhangyuyang.kuakua.base.BasePresenter;
+import android.support.v4.app.Fragment;
+
+import club.zhangyuyang.kuakua.fragment.ChatFragment;
+import club.zhangyuyang.kuakua.fwk_model.DataModel;
 
 /**
  * @Author :   yuyang
@@ -11,6 +14,18 @@ import club.zhangyuyang.kuakua.base.BasePresenter;
  * Content   : TODO
  * Other     :
  */
-public class ChatPresenter{
+public class ChatPresenter {
 
+    private ChatFragment mFragment;
+
+    public ChatPresenter(Fragment fragment) {
+        mFragment = (ChatFragment) fragment;
+    }
+
+    public void initView() {
+
+        DataModel.initDatabase();
+        DataModel.initFriendDatabase();
+        mFragment.initView(DataModel.queryChatFriendList());
+    }
 }

@@ -13,4 +13,5 @@
     <dimen name="text_size_20sp">20sp</dimen>
     <dimen name="padding_60dp">60dp</dimen>
     <dimen name="padding_300dp">30dp</dimen>
+    <dimen name="text_size_24sp">24sp</dimen>
 </resources>

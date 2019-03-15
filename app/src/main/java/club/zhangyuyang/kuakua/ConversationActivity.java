@@ -82,6 +82,16 @@ public class ConversationActivity extends BaseActicity implements IConversationV
         mRecyclerView.scrollToPosition(mPresenter.getAdapterLastIndex());
     }
 
+    public void refreshRecyclerViewWithDelay() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mRecyclerView.setAdapter(mPresenter.getAdapter());
+                mRecyclerView.scrollToPosition(mPresenter.getAdapterLastIndex());
+            }
+        }, 1000);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -97,13 +107,8 @@ public class ConversationActivity extends BaseActicity implements IConversationV
                     mPresenter.sendMessage(message);
                     refreshRecyclerView();
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mPresenter.excuteMessage(message);
-                            refreshRecyclerView();
-                        }
-                    }, 1000);
+                    mPresenter.excuteMessage(message);
+
 
                 }
                 break;
