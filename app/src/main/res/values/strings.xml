@@ -7,4 +7,7 @@
     <string name="test">Test</string>
     <string name="bt_send">send</string>
     <string name="et_conversation">type something here</string>
+    <string name="bt_setting">Advanced Set</string>
+    <string name="tv_setting">modify reply</string>
+    <string name="navi">findy Page comming soon</string>
 </resources>
