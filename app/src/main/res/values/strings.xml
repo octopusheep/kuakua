@@ -10,4 +10,6 @@
     <string name="bt_setting">Advanced Set</string>
     <string name="tv_setting">modify reply</string>
     <string name="navi">findy Page comming soon</string>
+    <string name="username_default">Default</string>
+
 </resources>

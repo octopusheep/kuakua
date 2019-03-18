@@ -1,5 +1,8 @@
 package club.zhangyuyang.kuakua.fwk_view;
 
+import java.util.List;
+
+import club.zhangyuyang.kuakua.fwk_model.FriendBean;
 import club.zhangyuyang.kuakua.fwk_model.UserBean;
 
 /**
@@ -12,5 +15,5 @@ import club.zhangyuyang.kuakua.fwk_model.UserBean;
  * Other     :
  */
 public interface ISettingView {
-    void initView(UserBean userBean);
+    void initView(UserBean userBean, List<FriendBean> list);
 }

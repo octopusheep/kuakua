@@ -32,7 +32,9 @@ public class SettingPresenter {
     }
 
     public void initView() {
-        mFragment.initView(DataModel.queryUserInformation());
+        mFragment.initView(
+                DataModel.queryUserInformation(),
+                DataModel.queryAllFriendList());
     }
 
 }
