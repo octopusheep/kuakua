@@ -3,6 +3,7 @@ package club.zhangyuyang.kuakua.fwk_view;
 import java.util.List;
 
 import club.zhangyuyang.kuakua.fwk_model.AnswerBean;
+import club.zhangyuyang.kuakua.fwk_model.FriendBean;
 
 /**
  * @Author :   yuyang
@@ -14,5 +15,6 @@ import club.zhangyuyang.kuakua.fwk_model.AnswerBean;
  * Other     :
  */
 public interface IReplyView {
-    void initView(List<AnswerBean> list);
+    void initView(String username, List<AnswerBean> list, FriendBean friendBean);
+
 }

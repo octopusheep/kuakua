@@ -26,6 +26,9 @@ public class AnswerBean extends LitePalSupport {
     private String answer8;
     private String answer9;
 
+    public AnswerBean() {
+    }
+
     public AnswerBean(String username, String question, String answer1) {
         this.username = username;
         this.question = question;

@@ -1,7 +1,6 @@
 package club.zhangyuyang.kuakua.fwk_presenter;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 
 import club.zhangyuyang.kuakua.ConversationActivity;
 import club.zhangyuyang.kuakua.adapter.ConversationAdapter;
@@ -33,10 +32,10 @@ public class ConversationPresenter {
 
     public void initView() {
 
-        DataModel.initDatabase();
+        DataModel.initDB();
         mActivity.initView(
                 DataModel.queryMessageList(mGuestUsername),
-                DataModel.queryGuestNickname(mGuestUsername),
+                DataModel.queryNicknameByUsername(mGuestUsername),
                 DataModel.queryUserInformation());
 
     }

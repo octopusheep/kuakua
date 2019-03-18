@@ -24,7 +24,7 @@ public class ChatPresenter {
 
     public void initView() {
 
-        DataModel.initDatabase();
+        DataModel.initDB();
         DataModel.initFriendDatabase();
         mFragment.initView(DataModel.queryChatFriendList());
     }

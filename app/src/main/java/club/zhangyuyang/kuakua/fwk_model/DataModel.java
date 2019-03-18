@@ -24,7 +24,12 @@ public class DataModel {
     public static UserBean sUserBean = new UserBean(R.drawable.icon_dog, "admin", "123456", "Utopia", "male", "I like Minecraft", "Hangzhou");
 
     static {
-        sAnswerBeanList.add(new AnswerBean("hello", "hi"));
+        sAnswerBeanList.add(new AnswerBean("f1","hello", "hi"));
+        sAnswerBeanList.add(new AnswerBean("f1","1", "1"));
+        sAnswerBeanList.add(new AnswerBean("f2","2", "2"));
+        sAnswerBeanList.add(new AnswerBean("f3","3", "3"));
+        sAnswerBeanList.add(new AnswerBean("f4","4", "4"));
+        sAnswerBeanList.add(new AnswerBean("f5","5", "5"));
 
         sFriendBeanList.add(new FriendBean("f1",R.drawable.icon_bear, "僵尸"));
         sFriendBeanList.add(new FriendBean("f2",R.drawable.icon_dog, "骷髅"));
@@ -39,6 +44,12 @@ public class DataModel {
         sFriendBeanList.add(new FriendBean("f11",R.drawable.icon_bear, "溺尸"));
     }
 
+    public static void initDB() {
+        initDatabase();
+        initAnswerDatabase();
+        initFriendDatabase();
+    }
+
     public static String queryAnswer(String username, String question) {
 
         initAnswerDatabase();
@@ -51,7 +62,7 @@ public class DataModel {
     }
 
     public static List<AnswerBean> queryAnswerList(String username, String question) {
-        return LitePal.where("question like ?", question).find(AnswerBean.class);
+        return LitePal.where("username = ? and question = ?",username ,question).find(AnswerBean.class);
     }
 
     public static boolean isFindAnswer(String username, String question) {
@@ -99,7 +110,7 @@ public class DataModel {
         return LitePal.find(UserBean.class, 1);
     }
 
-    public static String queryGuestNickname(String guestUsername) {
+    public static String queryNicknameByUsername(String guestUsername) {
         return LitePal.where("username like ?", guestUsername).find(FriendBean.class).get(0).getNickname();
     }
 
@@ -118,6 +129,25 @@ public class DataModel {
     public static String queryLastMessageByUsername(String username) {
         int lastIndex = queryMessageList(username).size();
         return queryMessageList(username).get(lastIndex - 1).getMessage();
+    }
+
+    public static List<AnswerBean> queryAllAnswerListByUsername(String username) {
+        return LitePal.where("username like ?", username).find(AnswerBean.class);
+    }
+
+    public static void deleteAnswerByUsernameAndQuestion(String username,String question) {
+        LitePal.deleteAll(AnswerBean.class, "username like ? and question like ?", username, question);
+    }
+
+    public static FriendBean queryFriendByUsername(String username) {
+        return LitePal.where("username like ?", username).find(FriendBean.class).get(0);
+    }
+
+    public static void updateAnswerByUsernameAndQuestion(String username, String oldQuestion,String newQuestion,String answer) {
+        AnswerBean answerBean = new AnswerBean();
+        answerBean.setQuestion(newQuestion);
+        answerBean.setAnswer1(answer);
+        answerBean.updateAll("username = ? and question = ?", username, oldQuestion);
     }
 }
 

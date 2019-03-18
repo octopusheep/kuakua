@@ -3,6 +3,7 @@ package club.zhangyuyang.kuakua.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import club.zhangyuyang.kuakua.R;
+import club.zhangyuyang.kuakua.ReplyActivity;
 import club.zhangyuyang.kuakua.fwk_model.FriendBean;
 
 /**
@@ -24,6 +26,7 @@ import club.zhangyuyang.kuakua.fwk_model.FriendBean;
  * Other     :
  */
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.VH> {
+    private static final String TAG = "SettingAdapter";
 
     private Context mContext;
     private List<FriendBean> mList;
@@ -42,17 +45,22 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull SettingAdapter.VH vh, int i) {
-        if (i == 0) {
-            vh.mTextView.setText(R.string.username_default);
-        } else {
-            vh.mTextView.setText(mList.get(i - 1).getNickname());
-        }
+        final FriendBean friendBean = mList.get(i);
+
+        vh.mTextView.setText(friendBean.getNickname());
+        vh.mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReplyActivity.startReplyActivity(mContext, friendBean.getUsername());
+            }
+        });
+
 
     }
 
     @Override
     public int getItemCount() {
-        return mList.size() + 1;
+        return mList.size();
     }
 
 

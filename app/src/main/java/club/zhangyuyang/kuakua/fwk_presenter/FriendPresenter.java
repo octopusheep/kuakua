@@ -28,7 +28,7 @@ public class FriendPresenter {
 
     public void initView() {
 
-        DataModel.initDatabase();
+        DataModel.initDB();
         DataModel.initFriendDatabase();
         mFragment.initView(DataModel.queryAllFriendList());
     }
