@@ -2,12 +2,10 @@ package club.zhangyuyang.kuakua;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +25,8 @@ public class ReplyActivity extends BaseActicity implements IReplyView, View.OnCl
 
     private TextView mTextView;
     private RecyclerView mRecyclerView;
-    private ImageView mImageView;
+    private ImageView mImageView1;
+    private ImageView mImageView2;
     private ReplyAdapter mAdapter;
 
     @Override
@@ -48,11 +47,27 @@ public class ReplyActivity extends BaseActicity implements IReplyView, View.OnCl
     public void initView(String username, List<AnswerBean> list, FriendBean friendBean) {
         mTextView = (TextView) findViewById(R.id.tv_title_activity_reply);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_reply);
-        mImageView = (ImageView) findViewById(R.id.iv_back_activity_reply);
+        mImageView1 = (ImageView) findViewById(R.id.iv_back_activity_reply);
+        mImageView2 = (ImageView) findViewById(R.id.iv_add_activity_reply);
 
-        mImageView.setOnClickListener(this);
+        mImageView1.setOnClickListener(this);
+        mImageView2.setOnClickListener(this);
         mTextView.setText(username + " " + getResources().getString(R.string.tv_reply));
         mAdapter = new ReplyAdapter(this, list, friendBean);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void initView(String username, List<AnswerBean> list) {
+        mTextView = (TextView) findViewById(R.id.tv_title_activity_reply);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_reply);
+        mImageView1 = (ImageView) findViewById(R.id.iv_back_activity_reply);
+        mImageView2 = (ImageView) findViewById(R.id.iv_add_activity_reply);
+
+        mImageView1.setOnClickListener(this);
+        mImageView2.setOnClickListener(this);
+        mTextView.setText(username + " " + getResources().getString(R.string.tv_reply));
+        mAdapter = new ReplyAdapter(this, list, username);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -70,7 +85,20 @@ public class ReplyActivity extends BaseActicity implements IReplyView, View.OnCl
             case R.id.iv_back_activity_reply:
                 finish();
                 break;
+            case R.id.iv_add_activity_reply:
+                mPresenter.addAnswerbyUsername();
+                refreshView();
+                scrollToLastIndex();
+                break;
         }
+    }
+
+    public void scrollToLastIndex() {
+        mRecyclerView.scrollToPosition(mPresenter.getAdapter().getItemCount() - 1);
+    }
+
+    public void scrollToCurrentIndex(int index) {
+        mRecyclerView.scrollToPosition(index);
     }
 
     public void refreshView() {

@@ -31,11 +31,18 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.VH> {
     private ReplyActivity mContext;
     private List<AnswerBean> mList;
     private FriendBean mFriendBean;
+    private String mString="";
 
     public ReplyAdapter(Context context, List<AnswerBean> list, FriendBean friendBean) {
         mContext = (ReplyActivity) context;
         mList = list;
         mFriendBean = friendBean;
+    }
+
+    public ReplyAdapter(Context context, List<AnswerBean> list, String friendName) {
+        mContext = (ReplyActivity) context;
+        mList = list;
+        mString = friendName;
     }
 
     @NonNull
@@ -47,30 +54,68 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH vh, int i) {
+
         final AnswerBean answerBean = mList.get(i);
         final VH vh1 = vh;
+        final int index = i;
         vh1.mQuestion.setText(answerBean.getQuestion());
         vh1.mAnswer.setText(answerBean.getAnswer1());
-        vh1.mDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DataModel.deleteAnswerByUsernameAndQuestion(mFriendBean.getUsername(), answerBean.getQuestion());
-                mContext.refreshView();
-            }
-        });
-        vh1.mUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                DataModel.updateAnswerByUsernameAndQuestion(
-                        mFriendBean.getUsername(),
-                        answerBean.getQuestion(),
-                        vh1.mQuestion.getText().toString(),
-                        vh1.mAnswer.getText().toString()
-                );
-                mContext.refreshView();
-            }
-        });
+        if (mString.equals("default")) {
+
+            vh1.mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataModel.deleteAnswerByUsernameAndQuestion(
+                            mString,
+                            answerBean.getQuestion(),
+                            answerBean.getAnswer1());
+                    mContext.refreshView();
+                }
+            });
+            vh1.mUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DataModel.updateAnswerByUsernameAndQuestion(
+                            mString,
+                            answerBean.getQuestion(),
+                            answerBean.getAnswer1(),
+                            vh1.mQuestion.getText().toString(),
+                            vh1.mAnswer.getText().toString()
+                    );
+                    mContext.refreshView();
+                    mContext.scrollToCurrentIndex(index);
+                }
+            });
+        } else {
+
+            vh1.mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataModel.deleteAnswerByUsernameAndQuestion(
+                            mFriendBean.getUsername(),
+                            answerBean.getQuestion(),
+                            answerBean.getAnswer1());
+                    mContext.refreshView();
+                }
+            });
+            vh1.mUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DataModel.updateAnswerByUsernameAndQuestion(
+                            mFriendBean.getUsername(),
+                            answerBean.getQuestion(),
+                            answerBean.getAnswer1(),
+                            vh1.mQuestion.getText().toString(),
+                            vh1.mAnswer.getText().toString()
+                    );
+                    mContext.refreshView();
+                    mContext.scrollToCurrentIndex(index);
+                }
+            });
+        }
     }
 
     @Override

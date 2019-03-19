@@ -45,22 +45,31 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull SettingAdapter.VH vh, int i) {
-        final FriendBean friendBean = mList.get(i);
+        if (i == 0) {
+            vh.mTextView.setText(R.string.tv_reply_default);
+            vh.mLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ReplyActivity.startReplyActivity(mContext, "default");
+                }
+            });
+        } else {
 
-        vh.mTextView.setText(friendBean.getNickname());
-        vh.mLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ReplyActivity.startReplyActivity(mContext, friendBean.getUsername());
-            }
-        });
+            final FriendBean friendBean = mList.get(i-1);
 
-
+            vh.mTextView.setText(friendBean.getNickname());
+            vh.mLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ReplyActivity.startReplyActivity(mContext, friendBean.getUsername());
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList.size()+1;
     }
 
 

@@ -21,27 +21,23 @@ public class DataModel {
     public static final String DEFAULT_ANSWER = "sorry, I do not understand your mean.";
     public static List<AnswerBean> sAnswerBeanList = new ArrayList<>();
     public static List<FriendBean> sFriendBeanList = new ArrayList<>();
-    public static UserBean sUserBean = new UserBean(R.drawable.icon_dog, "admin", "123456", "Utopia", "male", "I like Minecraft", "Hangzhou");
+    public static UserBean sUserBean = new UserBean(R.drawable.icon_dog, "admin", "123456", "秃秃", "male", "I like Minecraft", "Hangzhou");
 
     static {
-        sAnswerBeanList.add(new AnswerBean("f1","hello", "hi"));
-        sAnswerBeanList.add(new AnswerBean("f1","1", "1"));
-        sAnswerBeanList.add(new AnswerBean("f2","2", "2"));
-        sAnswerBeanList.add(new AnswerBean("f3","3", "3"));
-        sAnswerBeanList.add(new AnswerBean("f4","4", "4"));
-        sAnswerBeanList.add(new AnswerBean("f5","5", "5"));
 
-        sFriendBeanList.add(new FriendBean("f1",R.drawable.icon_bear, "僵尸"));
-        sFriendBeanList.add(new FriendBean("f2",R.drawable.icon_dog, "骷髅"));
-        sFriendBeanList.add(new FriendBean("f3",R.drawable.icon_bear, "苦力怕"));
-        sFriendBeanList.add(new FriendBean("f4",R.drawable.icon_dog, "蜘蛛"));
-        sFriendBeanList.add(new FriendBean("f5",R.drawable.icon_bear, "卫道士"));
-        sFriendBeanList.add(new FriendBean("f6",R.drawable.icon_dog, "烈焰人"));
-        sFriendBeanList.add(new FriendBean("f7",R.drawable.icon_bear, "粘液怪"));
-        sFriendBeanList.add(new FriendBean("f8",R.drawable.icon_dog, "末影龙"));
-        sFriendBeanList.add(new FriendBean("f9",R.drawable.icon_bear, "恶魂"));
-        sFriendBeanList.add(new FriendBean("f10",R.drawable.icon_dog, "僵尸村民"));
-        sFriendBeanList.add(new FriendBean("f11",R.drawable.icon_bear, "溺尸"));
+
+        sAnswerBeanList.add(new AnswerBean("hi", "hello"));
+
+        sFriendBeanList.add(new FriendBean("f1", R.drawable.icon_a, "每皮儿"));
+        sFriendBeanList.add(new FriendBean("f2", R.drawable.icon_b, "慈善赌王"));
+        sFriendBeanList.add(new FriendBean("f3", R.drawable.icon_c, "二媛"));
+        sFriendBeanList.add(new FriendBean("f4", R.drawable.icon_d, "拉拉"));
+        sFriendBeanList.add(new FriendBean("f5", R.drawable.icon_e, "老法师"));
+        sFriendBeanList.add(new FriendBean("f6", R.drawable.icon_f, "德德"));
+        sFriendBeanList.add(new FriendBean("f7", R.drawable.icon_g, "柯柯"));
+        sFriendBeanList.add(new FriendBean("f8", R.drawable.icon_h, "男男"));
+        sFriendBeanList.add(new FriendBean("f9", R.drawable.icon_i, "冯巩"));
+
     }
 
     public static void initDB() {
@@ -52,9 +48,10 @@ public class DataModel {
 
     public static String queryAnswer(String username, String question) {
 
-        initAnswerDatabase();
         if (isFindAnswer(username, question)) {
             return queryAnswerList(username, question).get(0).getAnswer1();
+        } else if (isFindAnswer(question)) {
+            return queryAnswerList(question).get(0).getAnswer1();
         } else {
             return DEFAULT_ANSWER;
         }
@@ -62,16 +59,25 @@ public class DataModel {
     }
 
     public static List<AnswerBean> queryAnswerList(String username, String question) {
-        return LitePal.where("username = ? and question = ?",username ,question).find(AnswerBean.class);
+        return LitePal.where("username = ? and question = ?", username, question).find(AnswerBean.class);
+    }
+
+    public static List<AnswerBean> queryAnswerList(String question) {
+        return LitePal.where("username = ? and question = ?", "default", question).find(AnswerBean.class);
     }
 
     public static boolean isFindAnswer(String username, String question) {
         return queryAnswerList(username, question).size() != 0;
     }
 
+    public static boolean isFindAnswer(String question) {
+        return queryAnswerList(question).size() != 0;
+    }
+
     public static List<AnswerBean> queryAllAnswerList() {
         return LitePal.findAll(AnswerBean.class);
     }
+
     public static List<FriendBean> queryAllFriendList() {
         return LitePal.findAll(FriendBean.class);
     }
@@ -79,6 +85,7 @@ public class DataModel {
     public static boolean isInitAnswer() {
         return queryAllAnswerList().size() != 0;
     }
+
     public static boolean isInitFriend() {
         return queryAllFriendList().size() != 0;
     }
@@ -135,19 +142,27 @@ public class DataModel {
         return LitePal.where("username like ?", username).find(AnswerBean.class);
     }
 
-    public static void deleteAnswerByUsernameAndQuestion(String username,String question) {
-        LitePal.deleteAll(AnswerBean.class, "username like ? and question like ?", username, question);
+    public static void deleteAnswerByUsernameAndQuestion(String username, String question, String answer) {
+        LitePal.deleteAll(AnswerBean.class, "username = ? and question = ? and answer1 = ?", username, question, answer);
     }
 
     public static FriendBean queryFriendByUsername(String username) {
-        return LitePal.where("username like ?", username).find(FriendBean.class).get(0);
+        return LitePal.where("username = ?", username).find(FriendBean.class).get(0);
     }
 
-    public static void updateAnswerByUsernameAndQuestion(String username, String oldQuestion,String newQuestion,String answer) {
+    public static void updateAnswerByUsernameAndQuestion(String username, String oldQuestion, String oldAnswer, String newQuestion, String newAnswer) {
         AnswerBean answerBean = new AnswerBean();
         answerBean.setQuestion(newQuestion);
-        answerBean.setAnswer1(answer);
-        answerBean.updateAll("username = ? and question = ?", username, oldQuestion);
+        answerBean.setAnswer1(newAnswer);
+        answerBean.updateAll("username = ? and question = ? and answer1 = ?", username, oldQuestion, oldAnswer);
+    }
+
+    public static void addAnswerByUsername(String username) {
+        AnswerBean answerBean = new AnswerBean();
+        answerBean.setUsername(username);
+        answerBean.setQuestion("");
+        answerBean.setAnswer1("");
+        answerBean.save();
     }
 }
 

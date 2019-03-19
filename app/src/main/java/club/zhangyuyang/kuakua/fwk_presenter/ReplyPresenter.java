@@ -35,17 +35,37 @@ public class ReplyPresenter {
 
         Log.d(TAG, "username: " + mString);
         Log.d(TAG, "list size: " + DataModel.queryAllAnswerListByUsername(mString).size());
-        mActivity.initView(
-                DataModel.queryNicknameByUsername(mString),
-                DataModel.queryAllAnswerListByUsername(mString),
-                DataModel.queryFriendByUsername(mString)
-        );
+
+        if (mString.equals("default")) {
+            mActivity.initView(
+                    mString,
+                    DataModel.queryAllAnswerListByUsername(mString)
+            );
+        } else {
+            mActivity.initView(
+                    DataModel.queryNicknameByUsername(mString),
+                    DataModel.queryAllAnswerListByUsername(mString),
+                    DataModel.queryFriendByUsername(mString)
+            );
+        }
     }
 
     public ReplyAdapter getAdapter() {
-        return new ReplyAdapter(
-                mActivity,
-                DataModel.queryAllAnswerListByUsername(mString),
-                DataModel.queryFriendByUsername(mString));
+        if (mString.equals("default")) {
+            return new ReplyAdapter(
+                    mActivity,
+                    DataModel.queryAllAnswerListByUsername(mString),
+                    mString);
+        } else {
+            return new ReplyAdapter(
+                    mActivity,
+                    DataModel.queryAllAnswerListByUsername(mString),
+                    DataModel.queryFriendByUsername(mString));
+        }
+
+    }
+
+    public void addAnswerbyUsername() {
+        DataModel.addAnswerByUsername(mString);
     }
 }

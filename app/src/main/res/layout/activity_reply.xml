@@ -29,9 +29,11 @@
             android:text="@string/test" />
 
         <ImageView
+            android:id="@+id/iv_add_activity_reply"
             android:layout_width="@dimen/padding_30dp"
             android:layout_height="@dimen/padding_30dp"
-            android:layout_margin="@dimen/padding_10dp" />
+            android:layout_margin="@dimen/padding_10dp"
+            android:background="@android:drawable/ic_menu_add" />
 
     </LinearLayout>
 

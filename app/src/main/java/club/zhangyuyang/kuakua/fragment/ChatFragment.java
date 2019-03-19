@@ -61,5 +61,9 @@ public class ChatFragment extends Fragment implements IChatView {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
     }
 
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        mRecyclerView.setAdapter(mAdapter);
+    }
 }

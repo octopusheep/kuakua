@@ -10,7 +10,7 @@
     <string name="bt_setting">Advanced Set</string>
     <string name="tv_setting">modify reply</string>
     <string name="navi">findy Page comming soon</string>
-    <string name="username_default">default</string>
+    <string name="tv_reply_default">Default Reply</string>
     <string name="tv_question">Q: </string>
     <string name="tv_answer">A: </string>
     <string name="tv_reply"> Reply</string>

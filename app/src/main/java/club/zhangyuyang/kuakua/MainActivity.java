@@ -45,10 +45,10 @@ public class MainActivity extends BaseActicity implements IMainView, View.OnClic
     @Override
     public void initView() {
 
-        mBottomBarItem1 = (BottomBarItem1) findViewById(R.id.item_bottom_bar_1);
-        mBottomBarItem2 = (BottomBarItem2) findViewById(R.id.item_bottom_bar_2);
-        mBottomBarItem3 = (BottomBarItem3) findViewById(R.id.item_bottom_bar_3);
-        mBottomBarItem4 = (BottomBarItem4) findViewById(R.id.item_bottom_bar_4);
+        mBottomBarItem1 = findViewById(R.id.item_bottom_bar_1);
+        mBottomBarItem2 = findViewById(R.id.item_bottom_bar_2);
+        mBottomBarItem3 = findViewById(R.id.item_bottom_bar_3);
+        mBottomBarItem4 = findViewById(R.id.item_bottom_bar_4);
 
         mBottomBarItem1.setOnClickListener(this);
         mBottomBarItem2.setOnClickListener(this);
